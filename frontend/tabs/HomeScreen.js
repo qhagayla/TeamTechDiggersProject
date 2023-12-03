@@ -131,23 +131,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    fontFamily: 'IBMPlexMono-Regular',
-    color: '#fff',
+    color: '#000', // Updated color to black
     textAlign: 'center',
     marginTop: 20,
   },
   subHeaderText: {
     fontSize: 16,
-    color: '#fff',
+    color: '#000', // Updated color to black
     marginBottom: 20,
-    fontFamily: 'IBMPlexMono-Regular',
     textAlign: 'center',
   },
   recommendedText: {
     fontSize: 18,
-    fontFamily: 'IBMPlexMono-Regular',
     marginBottom: 10,
-    color: '#fff',
+    color: '#000', // Updated color to black
   },
   featureContainer: {
     flexDirection: 'row',
@@ -159,11 +156,11 @@ const styles = StyleSheet.create({
   },
   featureIcon: {
     fontSize: 24,
-    color: '#fff',
+    color: '#000', // Updated color to black
   },
   featureTitle: {
     marginTop: 5,
-    color: '#fff',
+    color: '#000', // Updated color to black
   },
   userInputContainer: {
     flexDirection: 'row',
@@ -177,9 +174,8 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 8,
-    fontFamily: 'IBMPlexMono-Regular',
     backgroundColor: '#fff',
-    color: '#000',
+    color: '#000', // Updated color to black
   },
   button: {
     width: 40,
@@ -189,9 +185,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    fontFamily: 'IBMPlexMono-Regular',
     fontSize: 18,
-    color: 'black',
+    color: '#000', // Updated color to black
   },
   flatList: {
     flex: 1,
@@ -224,9 +219,9 @@ const styles = StyleSheet.create({
   },
   displayedText: {
     fontSize: 16,
-    fontFamily: 'IBMPlexMono-Regular',
     color: '#fff',
   },
 });
+
 
 export default HomeScreen;
