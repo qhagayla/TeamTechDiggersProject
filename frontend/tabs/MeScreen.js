@@ -13,7 +13,7 @@ const MeScreen = ({ navigation }) => {
         const username = await AsyncStorage.getItem('username');
         if (username) {
           // Retrieve user data from the server based on the username
-          axios.get(`http://localhost:3002/user/${username}`)
+          axios.get(`http://192.168.100.5:3002/user/${username}`)
             .then((response) => {
               console.log('User Data from Server:', response.data);
               setUserData(response.data);
