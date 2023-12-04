@@ -1,7 +1,7 @@
 // Songlist.js
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, FlatList, Image, TouchableOpacity, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Songlist = () => {
@@ -36,6 +36,11 @@ const Songlist = () => {
 
   const handleLinkPress = (link) => {
     console.log('Opening Spotify link:', link);
+
+    if (link) {
+      Linking.openURL(link)
+        .catch(error => console.error('Error opening link:', error));
+    }
   };
 
   const handleHeartClick = (song) => {
