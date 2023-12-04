@@ -1,0 +1,4 @@
+- Authenticates users to create an account to access the mobile application connected to a MongoDB database
+- Suggests music tracks based on user-provided mood descriptions interpreted using a sentiment analysis-driven system.
+- Provides a user music library within the application that integrates with Spotify links.
+- Test and Evaluate the application system.
