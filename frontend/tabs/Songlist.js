@@ -39,7 +39,7 @@ const Songlist = () => {
   };
 
   const handleHeartClick = (song) => {
-    navigation.navigate('Playlist', { song });
+    navigation.navigate('Favourites', { song });
   };
 
   const renderSong = ({ item }) => (
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     padding: 8,
     marginBottom: 10,
     backgroundColor: '#fff',
+    marginTop: 30,
   },
   flatListContainer: {
     flex: 1,

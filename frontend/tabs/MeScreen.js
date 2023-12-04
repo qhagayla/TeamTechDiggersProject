@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Pressable, StyleSheet, ScrollView } from 'react-native';
-import axios from 'axios';
+import { View, Text, Pressable, StyleSheet, ScrollView, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MeScreen = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
+  const [userInputs, setUserInputs] = useState([]);
 
   useEffect(() => {
     // Fetch the username from AsyncStorage
@@ -13,14 +13,18 @@ const MeScreen = ({ navigation }) => {
         const username = await AsyncStorage.getItem('username');
         if (username) {
           // Retrieve user data from the server based on the username
-          axios.get(`http://192.168.100.5:3002/user/${username}`)
-            .then((response) => {
-              console.log('User Data from Server:', response.data);
-              setUserData(response.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
+          const response = await fetch(`http://192.168.100.5:3002/user/${username}`);
+          if (response.ok) {
+            const userData = await response.json();
+            setUserData(userData);
+          }
+
+          // Retrieve user inputs from AsyncStorage
+          const storedInputs = await AsyncStorage.getItem(`userInputs_${username}`);
+          if (storedInputs) {
+            const inputs = JSON.parse(storedInputs);
+            setUserInputs(inputs);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -36,6 +40,18 @@ const MeScreen = ({ navigation }) => {
     navigation.navigate('Welcome');
   };
 
+  const handleClearInputs = async () => {
+    try {
+      const username = await AsyncStorage.getItem('username');
+      await AsyncStorage.removeItem(`userInputs_${username}`);
+      setUserInputs([]);
+      Alert.alert('Success', 'User inputs cleared successfully.');
+    } catch (error) {
+      console.error('Error clearing user inputs:', error);
+      Alert.alert('Error', 'Failed to clear user inputs.');
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.userInfo}>
@@ -43,6 +59,22 @@ const MeScreen = ({ navigation }) => {
           <>
             <Text style={styles.username}>Username: {userData.username}</Text>
             <Text style={styles.name}>Name: {userData.firstName} {userData.lastName}</Text>
+            {/* Display the list of user inputs */}
+            <Text style={styles.name}>User Inputs:</Text>
+            <ScrollView>
+              {userInputs.map((input, index) => (
+                <Text key={index}>{input}</Text>
+              ))}
+            </ScrollView>
+            <Pressable
+              style={({ pressed }) => [
+                styles.button,
+                { backgroundColor: pressed ? '#097E53' : '#09E683', marginTop: 10 },
+              ]}
+              onPress={handleClearInputs}
+            >
+              <Text style={styles.buttonText}>Clear Inputs</Text>
+            </Pressable>
           </>
         ) : (
           <Text>Loading user data...</Text>
@@ -51,7 +83,7 @@ const MeScreen = ({ navigation }) => {
       <Pressable
         style={({ pressed }) => [
           styles.button,
-          { backgroundColor: pressed ? '#097E53' : '#09E683', marginTop: 100},
+          { backgroundColor: pressed ? '#097E53' : '#09E683', marginTop: 10 },
         ]}
         onPress={handleLogOut}
       >
@@ -59,7 +91,7 @@ const MeScreen = ({ navigation }) => {
       </Pressable>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -71,15 +103,16 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 20,
     color: 'black',
-    textAlign: 'left', // Left-align the text
+    textAlign: 'left',
     marginBottom: 10,
-    fontFamily: '../fonts/IBMPlexMono-Regular.ttf',
   },
   name: {
-    textAlign: 'left', // Left-align the text
-    fontFamily: '../fonts/IBMPlexMono-Regular.ttf',
+    textAlign: 'left',
     fontSize: 20,
     color: 'black',
+  },
+  userInfo: {
+    marginBottom: 20,
   },
   button: {
     width: 140,
@@ -90,7 +123,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   buttonText: {
-    fontFamily: '../fonts/IBMPlexMono-Regular.ttf',
     fontSize: 20,
     color: 'black',
   },

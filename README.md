@@ -7,6 +7,9 @@ git clone https://github.com/qhagayla/TeamTechDiggersProject.git
 ```
 ### Frontend
 #### Install dependencies
+```
+npm install -g expo-cli
+```
 
 ```
 npm install
@@ -30,4 +33,10 @@ node signupserver.js
 ```
 ```
 node meserver.js
+```
+```
+python songlist.py
+```
+```
+python songs.py
 ```
