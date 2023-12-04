@@ -48,3 +48,6 @@ python songlist.py
 ```
 python songs.py
 ```
+
+Note: 
+Change all the ip addresses in the codes by replacing your current device's ip address.
