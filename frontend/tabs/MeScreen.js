@@ -7,19 +7,16 @@ const MeScreen = ({ navigation }) => {
   const [userInputs, setUserInputs] = useState([]);
 
   useEffect(() => {
-    // Fetch the username from AsyncStorage
     const getUsernameFromStorage = async () => {
       try {
         const username = await AsyncStorage.getItem('username');
         if (username) {
-          // Retrieve user data from the server based on the username
           const response = await fetch(`http://192.168.100.5:3002/user/${username}`);
           if (response.ok) {
             const userData = await response.json();
             setUserData(userData);
           }
 
-          // Retrieve user inputs from AsyncStorage
           const storedInputs = await AsyncStorage.getItem(`userInputs_${username}`);
           if (storedInputs) {
             const inputs = JSON.parse(storedInputs);
@@ -35,8 +32,7 @@ const MeScreen = ({ navigation }) => {
   }, []);
 
   const handleLogOut = () => {
-    // Perform logout actions (e.g., clear AsyncStorage, navigate to the Welcome screen)
-    AsyncStorage.removeItem('username'); // Clear the stored username
+    AsyncStorage.removeItem('username');
     navigation.navigate('Welcome');
   };
 
@@ -59,13 +55,12 @@ const MeScreen = ({ navigation }) => {
           <>
             <Text style={styles.username}>Username: {userData.username}</Text>
             <Text style={styles.name}>Name: {userData.firstName} {userData.lastName}</Text>
-            {/* Display the list of user inputs */}
             <Text style={styles.name}>User Inputs:</Text>
-            <ScrollView>
+            <Text style={styles.userInputs}>
               {userInputs.map((input, index) => (
-                <Text key={index}>{input}</Text>
+                `${index + 1}. ${input}\n`
               ))}
-            </ScrollView>
+            </Text>
             <Pressable
               style={({ pressed }) => [
                 styles.button,
@@ -110,6 +105,12 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     color: 'black',
+  },
+  userInputs: {
+    textAlign: 'left',
+    fontSize: 16,
+    color: 'black',
+    marginTop: 5,
   },
   userInfo: {
     marginBottom: 20,
