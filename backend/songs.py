@@ -89,5 +89,5 @@ def get_spotify_access_token():
         return None
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=False)
+    app.run(host='192.168.100.5', port=5000, debug=True)
 
