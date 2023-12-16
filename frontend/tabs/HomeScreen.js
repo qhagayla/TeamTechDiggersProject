@@ -30,7 +30,7 @@ const HomeScreen = () => {
 
   const detectEmotion = async (text, username) => {
     try {
-      const response = await fetch('http://192.168.100.5:5000/detect-emotion', {
+      const response = await fetch('https://songsmood.onrender.com/detect-emotion', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

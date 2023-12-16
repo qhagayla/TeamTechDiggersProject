@@ -20,7 +20,7 @@ function LoginScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.100.5:3001/login', {
+      const response = await axios.post('https://loginmood.onrender.com/login', {
         username,
         password,
       });

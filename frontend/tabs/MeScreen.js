@@ -11,7 +11,7 @@ const MeScreen = ({ navigation }) => {
       try {
         const username = await AsyncStorage.getItem('username');
         if (username) {
-          const response = await fetch(`http://192.168.100.5:3002/user/${username}`);
+          const response = await fetch(`https://meserver-q7ul.onrender.com/user/${username}`);
           if (response.ok) {
             const userData = await response.json();
             setUserData(userData);

@@ -36,7 +36,7 @@ function SignUpScreen({ navigation }) {
   
     try {
       // Make a POST request to the server for signup
-      const response = await axios.post('http://192.168.100.5:3000/signup', {
+      const response = await axios.post('https://signupmood.onrender.com/signup', {
         firstName,
         lastName,
         username,

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "frontend",
+    "name": "Mood Sings",
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/MoodSingsLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/MoodSingsLogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.qhagayla.frontend"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7025f3a9-ccc1-408c-9e19-115c3d64088b"
+      }
     }
   }
 }

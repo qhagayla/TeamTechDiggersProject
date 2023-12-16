@@ -11,7 +11,7 @@ const Songlist = () => {
 
   const searchSongs = async () => {
     try {
-      const response = await fetch(`http://192.168.100.5:5001/search-songs?query=${searchQuery}`);
+      const response = await fetch(`https://songlistmood.onrender.com/search-songs?query=${searchQuery}`);
       if (response.ok) {
         const data = await response.json();
         setSongs(data.songs);
@@ -27,7 +27,7 @@ const Songlist = () => {
     if (searchQuery.trim() !== '') {
       searchSongs();
     } else {
-      fetch('http://192.168.100.5:5001/search-songs')
+      fetch('https://songlistmood.onrender.com/search-songs')
         .then(response => response.json())
         .then(data => setSongs(data.songs))
         .catch(error => console.error('Error fetching all songs:', error.message));
